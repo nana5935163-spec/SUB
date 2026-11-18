@@ -228,6 +228,9 @@ proxy-groups:
   - 🇩🇪德国•移联01
   url: http://www.gstatic.com/generate_204
   interval: 300
+  timeout: 2000
+  tolerance: 50
+  lazy: true
 - name: 故障转移
   type: fallback
   proxies:
@@ -244,11 +247,15 @@ proxy-groups:
   - 🇩🇪德国•移联01
   url: http://www.gstatic.com/generate_204
   interval: 300
+  timeout: 2000
+  max-failed-times: 3
+  lazy: true
 - name: 🌍 海外热门
   type: select
   proxies:
-  - 手动选择
+  - 故障转移
   - 自动选择
+  - 手动选择
   - DIRECT
 rules:
 - IP-CIDR,127.0.0.0/8,DIRECT,no-resolve
@@ -269,6 +276,25 @@ rules:
 - DOMAIN-SUFFIX,appsflyer.com,REJECT
 - DOMAIN-KEYWORD,guanggao,REJECT
 - DOMAIN-KEYWORD,admarvel,REJECT
+- DOMAIN-SUFFIX,douyin.com,DIRECT
+- DOMAIN-SUFFIX,douyincdn.com,DIRECT
+- DOMAIN-SUFFIX,douyin.com.cn,DIRECT
+- DOMAIN-SUFFIX,iesdouyin.com,DIRECT
+- DOMAIN-SUFFIX,snssdk.com,DIRECT
+- DOMAIN-SUFFIX,toutiao.com,DIRECT
+- DOMAIN-SUFFIX,pstatp.com,DIRECT
+- DOMAIN-SUFFIX,volcvideo.com,DIRECT
+- DOMAIN-KEYWORD,douyin,DIRECT
+- DOMAIN-SUFFIX,kuaishou.com,DIRECT
+- DOMAIN-SUFFIX,weibo.com,DIRECT
+- DOMAIN-SUFFIX,bilibili.com,DIRECT
+- DOMAIN-SUFFIX,zhihu.com,DIRECT
+- DOMAIN-SUFFIX,baidu.com,DIRECT
+- DOMAIN-SUFFIX,qq.com,DIRECT
+- DOMAIN-SUFFIX,taobao.com,DIRECT
+- DOMAIN-SUFFIX,tmall.com,DIRECT
+- DOMAIN-SUFFIX,jd.com,DIRECT
+- DOMAIN-SUFFIX,alipay.com,DIRECT
 - DOMAIN-SUFFIX,openai.com,🌍 海外热门
 - DOMAIN-SUFFIX,chatgpt.com,🌍 海外热门
 - DOMAIN-SUFFIX,oaistatic.com,🌍 海外热门
@@ -309,6 +335,9 @@ rules:
 - DOMAIN-SUFFIX,tiktok.com,🌍 海外热门
 - DOMAIN-SUFFIX,tiktokcdn.com,🌍 海外热门
 - DOMAIN-SUFFIX,musical.ly,🌍 海外热门
+- DOMAIN-SUFFIX,tiktokv.com,🌍 海外热门
+- DOMAIN-SUFFIX,byteoversea.com,🌍 海外热门
+- DOMAIN-SUFFIX,muscdn.com,🌍 海外热门
 - DOMAIN-SUFFIX,discord.com,🌍 海外热门
 - DOMAIN-SUFFIX,discordapp.com,🌍 海外热门
 - DOMAIN-SUFFIX,reddit.com,🌍 海外热门
@@ -338,4 +367,4 @@ rules:
 - DOMAIN-KEYWORD,github,🌍 海外热门
 - DOMAIN-SUFFIX,cn,DIRECT
 - GEOIP,CN,DIRECT,no-resolve
-- MATCH,手动选择
+- MATCH,故障转移
